@@ -1,4 +1,6 @@
 # The simplest neural network the world has ever seen
+# inspired by https://medium.com/technology-invention-and-more/how-to-build-a-simple-neural-network-in-9-lines-of-python-code-cc8f23647ca1
+
 from numpy import exp, array, random, dot
 
 training_set_inputs = array([[0,0,1], [1,1,1], [1,0,1], [0,1,1]])
