@@ -39,3 +39,40 @@ class NeuralNetwork():
 			# calculate the error (difference between the desired output and the prediceted output)
 			error = training_set_outputs - output
 
+			# multiply the error by the input and again by the gradient of the sigmoid curve.
+			# this means less confident weights are adjusted more.
+			# this means inputs, wehich are zero, do not cause changes to the weights.
+			adjustment = dot(training_set_inputs.T, error * self.__sigmoid_derivative(output))
+
+			# adjust the weights
+			self.synaptic_weights += adjustment
+
+			# hooray that was backpropagation
+
+	def think(self, inputs):
+		# pass inputs through our neural network
+		return self.__sigmoid(dot(inputs, self.synaptic_weights))
+
+
+if __name__ = "__main__":
+	#initialize the neural network
+	neural_network = NeuralNetwork()
+
+	print "Random starting synaptic weights"
+	print neural_network.synaptic_weights
+
+	# the training set. we have 4 examples, each consisting of 3 input values, and 1 output values
+	training_set_inputs = array([[0, 0, 1], [1, 1, 1], [1, 0, 1], [0, 1, 1]])
+	training_set_outputs = array([[0, 1, 1, 0]]).T
+
+	# Train the neural network using a training set.
+	# Do it 1000 times and make small adjustments each time.
+	neural_network.train(training_set_inputs, training_set_outputs, 1000)
+
+	print "New Synaptic Weights after training"
+	print neural_network.synaptic_weights
+
+	# Test the neural network with a new observation.
+	print "Considering new situation [1, 0, 0] -> ?: "
+	print neural_network.think(array([1, 0, 0]))
+	print (Math.round(_)) # round up last result
