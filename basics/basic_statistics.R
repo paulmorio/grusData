@@ -19,7 +19,7 @@ histogram_10000 = hist(random_points_10000,
                        border = "blue", # border color of bins
                        col = "green", # color inside bins
                        las = 1, # axis label orientation
-                       prob = TRUE) # in frequency or probability
+                       prob= FALSE) # in frequency or probability
 
 # using dnorm to draw the density curve
 x <- seq(-4, 4, 0.01)
@@ -35,5 +35,27 @@ histogram_cum_sum = hist(random_points_10000,
                          las = 1, # axis label orientation
                          prob = TRUE) # in frequency or probability
 histogram_cum_sum$counts = cumsum(histogram_cum_sum$counts) # adjust the list of counts in each bin to be the cumulative sum
-plot(x = histogram_cum_sum$breaks, y=histogram_cum_sum$density) # plot the adjusted histogram after counts adjustment to get cumulative histogram
-curve(pnorm(x, mean=0, sd=1),add=TRUE) # pnorm the previous x sequence
+plot(histogram_cum_sum) # plot the adjusted histogram after counts adjustment to get cumulative histogram
+curve(pnorm(x, mean=0, sd=1), add = TRUE) # pnorm the previous x sequence
+
+#Exponential
+interval.exp<-seq(0, 10, 0.01)
+plot(interval.exp,dexp(interval.exp,rate=0.5))
+lines(interval.exp,dexp(interval.exp,rate=1),col="red")
+lines(interval.exp,dexp(interval.exp,rate=2),col="blue")
+lines(interval.exp,dexp(interval.exp,rate=10),col="green")
+
+#Gamma
+interval.gamma<-seq(0, 20, 0.01)
+plot(interval.gamma,dgamma(interval.gamma,shape=1,scale=2))
+lines(interval.gamma,dgamma(interval.gamma,shape=2,scale=2),col="red")
+lines(interval.gamma,dgamma(interval.gamma,shape=5,scale=2),col="blue")
+lines(interval.gamma,dgamma(interval.gamma,shape=5,scale=0.5),col="green")
+
+
+#Student
+interval.t<-seq(-10,10, 0.01)
+plot(interval.t,dt(interval.t,10))
+lines(interval.t,dt(interval.t,5),col="red")
+lines(interval.t,dt(interval.t,2),col="blue")
+lines(interval.t,dt(interval.t,1),col="green")
