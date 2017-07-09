@@ -38,6 +38,7 @@ histogram_cum_sum$counts = cumsum(histogram_cum_sum$counts) # adjust the list of
 plot(histogram_cum_sum) # plot the adjusted histogram after counts adjustment to get cumulative histogram
 curve(pnorm(x, mean=0, sd=1), add = TRUE) # pnorm the previous x sequence
 
+## Simple empirical plots of the distributions themselves
 #Exponential
 interval.exp<-seq(0, 10, 0.01)
 plot(interval.exp,dexp(interval.exp,rate=0.5))
@@ -59,3 +60,25 @@ plot(interval.t,dt(interval.t,10))
 lines(interval.t,dt(interval.t,5),col="red")
 lines(interval.t,dt(interval.t,2),col="blue")
 lines(interval.t,dt(interval.t,1),col="green")
+
+## Simple empirical plots of the cumulative distributions (ECDF)
+#Exponential
+interval.exp<-seq(0, 10, 0.01)
+plot(interval.exp,pexp(interval.exp,rate=0.5))
+lines(interval.exp,pexp(interval.exp,rate=1),col="red")
+lines(interval.exp,pexp(interval.exp,rate=2),col="blue")
+lines(interval.exp,pexp(interval.exp,rate=10),col="green")
+
+#Gamma
+interval.gamma<-seq(0, 20, 0.01)
+plot(interval.gamma,pgamma(interval.gamma,shape=1,scale=2))
+lines(interval.gamma,pgamma(interval.gamma,shape=2,scale=2),col="red")
+lines(interval.gamma,pgamma(interval.gamma,shape=5,scale=2),col="blue")
+lines(interval.gamma,pgamma(interval.gamma,shape=5,scale=0.5),col="green")
+
+#Student
+interval.t<-seq(-10,10, 0.01)
+plot(interval.t,pt(interval.t,10))
+lines(interval.t,pt(interval.t,5),col="red")
+lines(interval.t,pt(interval.t,2),col="blue")
+lines(interval.t,pt(interval.t,1),col="green")
