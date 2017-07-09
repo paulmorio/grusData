@@ -82,3 +82,32 @@ plot(interval.t,pt(interval.t,10))
 lines(interval.t,pt(interval.t,5),col="red")
 lines(interval.t,pt(interval.t,2),col="blue")
 lines(interval.t,pt(interval.t,1),col="green")
+
+
+
+## Working with a tiny dataset
+setwd("~/workspace/grusData/basics")
+df = read.csv2(file = "Norm.t.data_.csv", header = TRUE,sep = ",", dec = ".")
+df$Process1 = as.numeric(df$Process1)
+df$Process2 = as.numeric(df$Process2)
+
+# draw histograms of both
+hist(df$Process1)
+hist(df$Process2)
+
+# draw ecdfs of both
+ecdf_process1 = hist(df$Process1)
+ecdf_process1$counts = cumsum(ecdf_process1$counts)
+plot(ecdf_process1)
+
+ecdf_process2 = hist(df$Process2)
+ecdf_process2$counts = cumsum(ecdf_process2$counts)
+plot(ecdf_process2)
+
+# plot them both
+plot(ecdf(df$Process1),col="red")
+plot(ecdf(df$Process2),col="blue",add=TRUE)
+
+# both plots looked quite similar (even though we know one was from a student t with 10, and the other a standard normal)
+# so we can look at the KS or Kolmagarov Smirnov test which computes the probaility of it being the same
+ks.test(df$Process1,df$Process2)
