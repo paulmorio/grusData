@@ -70,3 +70,4 @@ np.empty(3)
 np.zeros(10, dtype='int16')
 # or using the associated NumPy object:
 np.zeros(10, dtype=np.int16)
+# these are the same
