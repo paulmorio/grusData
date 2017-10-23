@@ -40,3 +40,14 @@ tp = np.dtype([('id', 'i8'), ('mat', 'f8', (3,3))])
 X = np.zeros(1,dtype = tp)
 print(X[0])
 print(X['mat'][0])
+
+# why would you use this silly stuff honestly, say instead of a dictionary or simple multidimensional array?
+# this is because the dtype directly maps onto a C structure definition, so the buffer containing the array can
+# be accessed directly with a C program 
+# yeah...
+
+# Record arrays 
+# numpy also provides the np.recarray class, where fields can be accessed as attributes rather than as dictionary keys 
+
+data_rec = data.view(np.recarray)
+data_rec.age # neat
