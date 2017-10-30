@@ -8,8 +8,11 @@ class BaseEstimator(object):
 
 	def _setup_input(self, X, y = None):
 		"""
-		Ensure some shit
-		
+        Ensures X and y are stored as numpy ndarrays by converting from an
+        array-like object if necessary. Enables estimators to define whether
+        they require a set of y target values or not with y_required, e.g.
+        kmeans clustering requires no target labels and is fit against only X.
+
 		Parameters
 		----------
 		X : array Like 
@@ -36,7 +39,7 @@ class BaseEstimator(object):
 			if y is None:
 				raise ValueError('Missed required argument y')
 
-			if non isinstance(n, np.ndarray):
+			if not isinstance(y, np.ndarray):
 				y = np.array(y)
 
 			if y.size = 0:
@@ -53,7 +56,8 @@ class BaseEstimator(object):
 
 		if self.X is not None or not self.fit_required:
 			return self._predict(X)
-		else: raise ValueError("Yo must call fit before predit")
+		else: 
+			raise ValueError("Yo must call fit before predit")
 
 	def _predict(self, X = None)
 		raise NotImplementedError()
