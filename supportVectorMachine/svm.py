@@ -40,7 +40,12 @@ class SVM(BaseEstimator):
     		alpha = L
     	return alpha
 
-    
+    def fit(self, X, y = None):
+    	self._setup_input(X,y)
+    	self.K = np.zeros((self.n_samples, self.n_samples))
+    	for i in range(self.n_samples):
+    		self.K[:,i] = self.kernel(self.X, self.X[i, :])
+
 
     def _error(self,i):
     	"""Error for single example"""
